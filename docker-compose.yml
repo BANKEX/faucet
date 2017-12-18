@@ -1,0 +1,31 @@
+version: '3'
+
+volumes:
+  mongo:
+
+services:
+  nginx:
+    image: jwilder/nginx-proxy
+    restart: always
+    hostname: nginx
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  mongo:
+    image: mongo
+    restart: always
+    hostname: mongo
+    volumes:
+      - mongo:/data/db
+
+  faucet:
+    build: .
+    restart: always
+    hostname: faucet
+    environment:
+      VIRTUAL_HOST: faucet.bankex.com
+    depends_on:
+      - mongo
+
