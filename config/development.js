@@ -1,10 +1,10 @@
 module.exports = {
     db: {
-        uri: 'localhost',
+        uri: 'mongo',
         port: 27017,
         name: 'developmentDb',
-        user: 'user',
-        password: 'pass',
+        user: '',
+        password: '',
     },
     auth: {
         usersTokenLife: 3600,
